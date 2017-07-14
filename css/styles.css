@@ -117,3 +117,7 @@ p {
 }
 
 .close:hover { background: #00d9ff; }
+
+#filterSection {
+  margin-left: 17px;
+}
