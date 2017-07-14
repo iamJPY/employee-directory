@@ -25,6 +25,10 @@ a {
   float: left;
 }
 
+.employee-profile:hover {
+  background-color: #ededed;
+}
+
 .employee-picture {
   margin: 25px 25px;
   border-radius: 50%;
