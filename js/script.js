@@ -1,10 +1,12 @@
 $(document).ready(function() {
 
+  let employeeList = {};
   // Call to Random User Generator API to generate 12 employees
   $.ajax({
     url: 'https://randomuser.me/api/?results=12&seed=coffee&nat=us',
     dataType: 'json',
     success: function(data) {
+      employeeList = data.results;
       let profile ='';
       let modal = '';
 
