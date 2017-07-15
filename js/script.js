@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   let employeeList = {};
+  
   // Call to Random User Generator API to generate 12 employees
   $.ajax({
     url: 'https://randomuser.me/api/?results=12&seed=coffee&nat=us',
@@ -18,12 +19,13 @@ $(document).ready(function() {
         profile += '<p class="name">' + employee.name.first + ' ' + employee.name.last + '</p>';
         profile += '<p class="email">' + employee.email + '</p>';
         profile += '<p class="city">' + employee.location.city + '</p>';
-        profile += '</a></td>';
+        profile += '</div></a></td>';
       });
 
       $('.employees').html(profile);
 
       $.each(data.results, function(i, employee) {
+
         // Format Birthdate
         let dobString = employee.dob.split('-');
         let dobDay = dobString[2].substring(0, 2);
@@ -39,7 +41,23 @@ $(document).ready(function() {
         modal += '<p>' + employee.location.street + ' ' + employee.location.city + ', ' + employee.location.state + ' ' + employee.location.postcode + '</p>';
         modal += '<p>' + birthday + '</p>';
         modal += '<div><a href="#close" title="Close" class="close">X</a></div>';
-        modal += '</div></div></div>';
+
+        // Employee gallery - next and previous links to navigate through employee detail windows
+        let next = i + 1;
+        let prev = i - 1;
+
+        if (i === 0) {
+          modal += '<a href="#openModal' + next + '" class="next">></a></div>';
+        } else if (i === 11) {
+          modal += '<div><a href="#openModal' + prev + '" class="prev"><</a>';
+        } else {
+          modal += '<div><a href="#openModal' + prev + '" class="prev"><</a>';
+          modal += '<a href="#openModal' + next + '" class="next">></a></div>';
+        }
+
+        modal += '</div></div>';
+        modal += '</div>';
+
       });
 
       $('#modals').html(modal);
