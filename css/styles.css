@@ -124,3 +124,7 @@ hr {
   background-color: lightgrey;
   border: none;
 }
+
+#filterSection {
+  margin-left: 17px;
+}

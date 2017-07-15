@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   // Call to Random User Generator API to generate 12 employees
   $.ajax({
-    url: 'https://randomuser.me/api/?results=12&seed=coffee',
+    url: 'https://randomuser.me/api/?results=12&seed=coffee&nat=us',
     dataType: 'json',
     success: function(data) {
       let profile ='';
@@ -44,5 +44,36 @@ $(document).ready(function() {
 
     }
   });
+
+    // Filter feature - allow to filter by name or username
+    // Add input field and button
+    let $filterContainer = $('<div id="filterSection">');
+    let $searchInputField = $('<input type="search" id="search">');
+    let $filterButton = $('<input type="button" id="button" value="Filter">');
+    $($filterContainer).append($searchInputField);
+    $($filterContainer).append($filterButton);
+    $('header').append($filterContainer);
+
+    // Filter button event handler
+    $($filterButton).click(function() {
+      let $searchValue = $('#search').val().toUpperCase();
+
+    $.each(employeeList, function(i, employee) {
+      let employeeName = employee.name.first + ' ' + employee.name.last;
+      let employeeUsername = employee.login.username;
+
+      // If search input matches an employee's name or username, show relevant results
+      // If search input is blank when filter is performed, then reset grid
+      if (employeeName.toUpperCase().indexOf($searchValue) > -1 && $searchValue !== '') {
+        $('td').hide();
+        $('#' + i).show();
+      } else if (employeeUsername.toUpperCase().indexOf($searchValue) > -1 && $searchValue !== '') {
+        $('td').hide();
+        $('#' + i).show();
+      } else if ($searchValue === '') {
+        $('td').show();
+      }
+    })
+  })
 
 });
