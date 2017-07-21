@@ -16,7 +16,6 @@ a {
 }
 
 .employee-profile {
-  white-space: nowrap;
   width: 360px;
   height: 155px;
   border: 2px solid lightgrey;
