@@ -42,7 +42,7 @@ $(document).ready(function() {
       modal += '<p class="email">' + employee.email + '</p>';
       modal += '<p class="city">' + employee.location.city + '</p><hr>';
       modal += '<p>' + employee.cell + '</p>';
-      modal += '<p>' + employee.location.street + ' ' + employee.location.city + ', ' + employee.location.state + ' ' + employee.location.postcode + '</p>';
+      modal += '<p>' + employee.location.street + ' ' + employee.location.city + ', ' + employee.location.state + ', ' + employee.nat + ' ' + employee.location.postcode + '</p>';
       modal += '<p>' + formatBirthdate(employee.dob) + '</p>';
       modal += '<div><a href="#close" title="Close" class="close">X</a></div>';
       modal += '<div><a href="#openModal' + prev + '" class="prev"><</a><a href="#openModal' + next + '" class="next">></a></div>';
@@ -104,9 +104,10 @@ $(document).ready(function() {
 
   // AJAX Call to Random User Generator API to generate 12 employees
   $.ajax({
-    url: 'https://randomuser.me/api/?results=12&seed=lovers&nat=us',
+    url: 'https://randomuser.me/api/?results=12&nat=us',
     dataType: 'json',
     success: function(data) {
+      console.log(data.results);
       getEmployeeData(data.results);
     }
   });
